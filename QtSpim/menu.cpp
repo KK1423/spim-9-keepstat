@@ -841,7 +841,7 @@ void SpimView::help_ViewHelp()
 
     char* assistant[] = {"assistant", // Windows
                          "/Applications/QtSpim.app/Contents/MacOS/Assistant", // Mac
-                         "/usr/lib/qtspim/bin/assistant", // Linux
+                         "assistant", // Linux
                          0};
 
     process->start(QLatin1String(assistant[i]), args);

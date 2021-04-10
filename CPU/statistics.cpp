@@ -8,7 +8,7 @@
 
 void statistics_reset(statistics_t *s)
 {
-   memset(s, 0, sizeof(s));
+   *s = statistics_t({0});
 }
 
 void statistics_print(statistics_t *s, port fp)

@@ -11,6 +11,17 @@
 RELEASE_DIR=build-QtSpim-Qt-Release
 SETUP_DIR=Setup/debian
 
+mkdir -p $RELEASE_DIR
+
+cd $RELEASE_DIR
+qmake ../QtSpim/QtSpim.pro
+make
+cd -
+
+cd spim
+make
+cd -
+
 ARCH=`arch`
 case $ARCH in
     i386 | i686) ARCH="i386";;
@@ -37,6 +48,7 @@ mkdir -p $SETUP_DIR/usr/share/man/man1
 mkdir -p $SETUP_DIR/usr/share/doc/qtspim
 mkdir -p $SETUP_DIR/usr/share/applications
 mkdir -p $SETUP_DIR/usr/share/qtspim
+mkdir -p $SETUP_DIR/usr/share/spim
 
 mkdir -p $SETUP_DIR/usr/lib/qtspim/help
 
@@ -49,33 +61,12 @@ chmod 0755 $SETUP_DIR/usr/lib/qtspim/bin/qtspim
 ln -s ../lib/qtspim/bin/qtspim $SETUP_DIR/usr/bin/qtspim
 chmod 0755 $SETUP_DIR/usr/bin/qtspim
 
-#assistant (helper)
-QT_BIN_DIR=`qtpaths --binaries-dir`
-install -s $QT_BIN_DIR/assistant $SETUP_DIR/usr/lib/qtspim/bin/assistant
-chmod 0755 $SETUP_DIR/usr/lib/qtspim/bin/assistant
+#spim
+install -s $RELEASE_DIR/../spim/spim $SETUP_DIR/usr/lib/qtspim/bin/spim
+chmod 0755 $SETUP_DIR/usr/lib/qtspim/bin/spim
 
-#qt.conf
-install Setup/qtspim_debian_deployment/qt.conf $SETUP_DIR/usr/lib/qtspim/bin/qt.conf
-chmod 0644 $SETUP_DIR/usr/lib/qtspim/bin/qt.conf
-
-#qtspim libraries
-QT_LIB_DIR=$QT_BIN_DIR/../lib
-install `ldd $RELEASE_DIR/QtSpim | grep = | grep Qt | cut -f 3 -s -d " " | xargs` $SETUP_DIR/usr/lib/qtspim/lib
-install $QT_LIB_DIR/libQt5XcbQpa.so.5 $SETUP_DIR/usr/lib/qtspim/lib
-install $QT_LIB_DIR/libQt5DBus.so.5 $SETUP_DIR/usr/lib/qtspim/lib
-install $QT_LIB_DIR/libQt5Svg.so.5 $SETUP_DIR/usr/lib/qtspim/lib
-
-#assistant libraries
-install `ldd $QT_BIN_DIR/assistant | grep = | grep Qt | cut -f 3 -s -d " " | xargs` $SETUP_DIR/usr/lib/qtspim/lib
-chmod 0644 $SETUP_DIR/usr/lib/qtspim/lib/*
-
-
-#plugins
-QT_PLUGIN_DIR=`qtpaths --plugin-directory`
-install $QT_PLUGIN_DIR/imageformats/{libqgif.so,libqico.so,libqjpeg.so,libqsvg.so} $SETUP_DIR/usr/lib/qtspim/plugins/imageformats
-install $QT_PLUGIN_DIR/platforms/libqxcb.so $SETUP_DIR/usr/lib/qtspim/plugins/platforms
-install $QT_PLUGIN_DIR/printsupport/libcupsprintersupport.so $SETUP_DIR/usr/lib/qtspim/plugins/printsupport
-install $QT_PLUGIN_DIR/sqldrivers/libqsqlite.so $SETUP_DIR/usr/lib/qtspim/plugins/sqldrivers
+ln -s ../lib/qtspim/bin/spim $SETUP_DIR/usr/bin/spim
+chmod 0755 $SETUP_DIR/usr/bin/spim
 
 
 #documentation
@@ -113,6 +104,10 @@ chmod 0644 $SETUP_DIR/usr/lib/qtspim/qtspim.png
 #helloworld
 cp -f helloworld.s $SETUP_DIR/usr/share/qtspim/helloworld.s
 chmod 0644 $SETUP_DIR/usr/share/qtspim/helloworld.s
+
+#exceptions
+cp -f CPU/exceptions.s $SETUP_DIR/usr/share/spim/exceptions.s
+chmod 0644 $SETUP_DIR/usr/share/spim/exceptions.s
 
 
 #doit

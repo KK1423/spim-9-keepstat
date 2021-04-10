@@ -156,6 +156,8 @@ void initialize_registers()
   HI = LO = 0;
   PC = 0;
 
+  statistics_reset(&global_stats); /* Added for keepstats */
+
   CP0_BadVAddr = 0;
   CP0_Count = 0;
   CP0_Compare = 0;
@@ -340,7 +342,8 @@ bool run_program(mem_addr pc, int steps, bool display, bool cont_bkpt, bool *con
   if (keep_stats && !*continuable)
   {
     statistics_print(&global_stats, message_out);
-  } // Added for keepstats
+    statistics_reset(&global_stats); /* Added for keepstats */
+  }                                  // Added for keepstats
   if (exception_occurred && CP0_ExCode == ExcCode_Bp)
   {
     /* Turn off EXL bit, so subsequent interrupts set EPC since the break is
