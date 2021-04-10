@@ -460,6 +460,7 @@ void SpimView::sim_Settings()
     Ui::SpimSettingDialog sd;
     sd.setupUi(&d);
 
+    sd.keepStatsCheckBox->setChecked(keep_stats);
     sd.bareMachineCheckBox->setChecked(bare_machine);
     sd.pseudoInstCheckBox->setChecked(accept_pseudo_insts);
     sd.delayedBranchCheckBox->setChecked(delayed_branches);
@@ -530,6 +531,7 @@ void SpimView::sim_Settings()
 
     if (d.exec() == QDialog::Accepted)
     {
+        keep_stats = sd.keepStatsCheckBox->isChecked();
         bare_machine = sd.bareMachineCheckBox->isChecked();
         accept_pseudo_insts = sd.pseudoInstCheckBox->isChecked();
         delayed_branches = sd.delayedBranchCheckBox->isChecked();

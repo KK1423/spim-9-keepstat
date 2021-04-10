@@ -134,7 +134,11 @@ static QStringList parseCommandLine(QStringList args)
             args[i][0] = '-';
         }
 #endif
-        if ((args[i] == "-asm") || (args[i] == "-a"))
+        if ((args[i] == "-keepstats"))
+	{
+            keep_stats = true;
+	}
+        else if ((args[i] == "-asm") || (args[i] == "-a"))
 	{
             bare_machine = false;
             delayed_branches = false;

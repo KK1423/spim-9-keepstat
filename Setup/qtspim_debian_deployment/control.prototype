@@ -6,6 +6,7 @@ Priority: extra
 Homepage: http://spimsimulator.sourceforge.net/
 Maintainer: James Larus <larus@larusstone.org>
 Installed-Size: 20000
+Build-Depends: qttools5-dev-tools
 Depends: libc6
 Description: Simulator for MIPS32 programs. It reads and executes
  assembly language programs written for the MIPS32 processor.

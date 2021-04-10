@@ -69,6 +69,7 @@
 #include <stdarg.h>
 
 #include "spim.h"
+#include "statistics.h"
 #include "string-stream.h"
 #include "spim-utils.h"
 #include "inst.h"
@@ -175,6 +176,10 @@ main (int argc, char **argv)
 	  bare_machine = false;
 	  delayed_branches = false;
 	  delayed_loads = false;
+	}
+      else if (streq (argv [i], "-keepstats"))
+	{
+    keep_stats = true;
 	}
       else if (streq (argv [i], "-bare")
 	       || streq (argv [i], "-b"))

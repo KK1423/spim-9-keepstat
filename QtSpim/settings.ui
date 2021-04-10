@@ -185,6 +185,13 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="keepStatsCheckBox">
+              <property name="text">
+               <string>Track branch/load/store stats</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="1">
              <widget class="settableCheckBox" name="pseudoInstCheckBox">
               <property name="text">
@@ -552,6 +559,7 @@
  </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
+  <tabstop>keepStatsCheckBox</tabstop>
   <tabstop>bareMachineCheckBox</tabstop>
   <tabstop>pseudoInstCheckBox</tabstop>
   <tabstop>delayedBranchCheckBox</tabstop>

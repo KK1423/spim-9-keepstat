@@ -62,6 +62,7 @@ SOURCES += main.cpp\
         ../CPU/run.cpp\
         ../CPU/spim-utils.cpp\
         ../CPU/string-stream.cpp\
+        ../CPU/statistics.cpp\
         ../CPU/sym-tbl.cpp\
         ../CPU/syscall.cpp\
         spim_support.cpp

@@ -42,6 +42,7 @@
 #include "ui_spimview.h"
 #include "console.h"
 
+#include "../CPU/statistics.h"
 #include "../CPU/spim.h"
 #include "../CPU/string-stream.h"
 #include "../CPU/spim-utils.h"
